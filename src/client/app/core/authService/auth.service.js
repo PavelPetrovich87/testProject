@@ -1,9 +1,9 @@
 (function (){
     var auth = angular.module('core.auth');
 
-    auth.provider('myAuth', authProvider);
+    auth.provider('authService', authServiceProvider);
 
-    function authProvider(){
+    function authServiceProvider(){
 
         //Authorization endpoint
         var endpointUri = '';
@@ -30,7 +30,7 @@
                 isAuthorized: isAuthorized,
                 getRole: getRole,
                 logout: logout 
-            }
+            };
 
             function authenticate(authData){
                 var jsonLoginData = JSON.stringify(authData);
@@ -52,6 +52,7 @@
 
                 function onError(res){
                     $rootScope.$broadcast(AUTH_EVENTS.loginFailed);
+                    logger.error('Authentification Error');
                     deferred.reject();
                 }
 
@@ -105,7 +106,7 @@
                 if (!angular.isArray(authorizedRoles)) {
                   authorizedRoles = [authorizedRoles];
                 }
-                return (authorizedRoles.indexOf(getRole()) !== -1); 
+                return (authorizedRoles.indexOf(getRole()) !== -1) 
             };
             //Clears cache and emit an appropriate event
             function logout(){
@@ -114,4 +115,4 @@
             }
         } 
     }
-})()
+})();

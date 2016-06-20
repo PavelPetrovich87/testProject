@@ -1,6 +1,15 @@
-<div class="panel mainbar">
-    <h3>LNP VIEW</h3>
-    <table class="table table-condensed table-striped" ng-repeat="lnp in vm.lnps">
-        <tr lnp  name={{lnp.firstName}} last-name={{lnp.lastName}} address={{lnp.serviceAddress}}></tr>
-    </table>
+<div class="mainbar">
+    <div class="widget wviolet col-md-6">
+        <div class="matter">
+            <div class="container">
+                <div class="row">
+                    <div ht-widget-header title="LNPS" allow-collapse="true"></div>    
+                    <table class="table table-condensed table-striped">
+                        <tr ng-repeat="lnp in vm.lnps"><td>{{lnp.firstName}}</td><td>{{lnp.lastName}}</td><td>{{lnp.serviceAddress}}</td></tr>
+                    </table> 
+                </div>
+            </div>       
+        </div>     
+    </div>
 </div>
+

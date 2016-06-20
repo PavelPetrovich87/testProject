@@ -9,15 +9,17 @@
     cacheManager.$inject = ['$q'];
 
     function cacheManager($q){
+        var localforage = window.localforage;
 
         return {
             Get: get,
             Set: set,
             Has: has,
-            Clear: clear
-        }
+            Clear: clear,
+        };
 
         function get(key){
+            console.log('getting from cache by the key:' + key);
             var deferred = $q.defer();           
             localforage.getItem(key)
                 .then(handleItem)
@@ -39,6 +41,7 @@
 
         function set(key, objToSet){
             var deferred = $q.defer();
+            console.log('setting to cache by the key:' + key);
             localforage.setItem(key, objToSet)
                     .then(function (value) {
                       deferred.resolve(value);
@@ -74,4 +77,4 @@
 
     }
 
-})()
+})();

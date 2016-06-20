@@ -18,10 +18,10 @@
       templateUrl: 'app/layout/ht-top-nav.html'
     };
 
-    TopNavController.$inject = ['$scope', 'myAuth', '$rootScope', 'AUTH_EVENTS'];
+    TopNavController.$inject = ['$scope', 'authService', '$rootScope', 'AUTH_EVENTS'];
 
     /* @ngInject */
-    function TopNavController($scope, myAuth, $rootScope, AUTH_EVENTS) {
+    function TopNavController($scope, authService, $rootScope, AUTH_EVENTS) {
       var vm = this;
       vm.isLogged = false;
       vm.logout = logout;
@@ -39,11 +39,11 @@
       });
 
       function refresh(){
-       vm.isLogged = myAuth.isAuthentificated();
+       vm.isLogged = authService.isAuthentificated();
      }
 
       function logout(){
-        myAuth.logout();
+        authService.logout();
       }
     }
 

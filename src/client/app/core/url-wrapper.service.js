@@ -2,11 +2,11 @@
 (function () {
   angular
     .module('app.core')
-    .factory('$ds', $ds);
+    .factory('urlWrapper', urlWrapper);
 
-  $ds.$inject = ['config'];
+  urlWrapper.$inject = ['config'];
 
-  function $ds(config) {
+  function urlWrapper(config) {
     var service = {};
     service.WrapUrl = WrapUrl;
     return service;

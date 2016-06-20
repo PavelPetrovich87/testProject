@@ -27,12 +27,22 @@
               roles: ['Reseller']
             },
             resolve: {
-                         lnps:['lnpModel', function(lnpModel){
-                            return lnpModel.GetList();
+                         lnps:['$q', 'lnpService', 'logger', function($q, lnpService, logger){
+                          var deferred = $q.defer();
+
+                             lnpService.GetList()
+                             .then(function(data){
+                              deferred.resolve(data);
+                             },
+                             function(error, data){
+                              logger.error(error);
+                              deferred.reject(error, data);
+                             });
+                             return deferred.promise;
                          }] 
                      } 
           }
         }
       ];
     }
-})()
+})();

@@ -15,9 +15,9 @@
   var config = {
     appErrorPrefix: '[testApp Error] ',
     appTitle: 'testApp',
-    servers: {
-      lnpServer: 'http://52.27.173.34:1336',
-      peopleServer: 'http://localhost:3000'
+    servers: {    
+      peopleServer: 'http://localhost:3000',
+       lnpServer: 'http://52.27.173.34:1336'
     }
   };
 

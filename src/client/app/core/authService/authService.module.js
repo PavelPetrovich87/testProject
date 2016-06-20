@@ -20,20 +20,20 @@
     auth.config(config);
     auth.run(runConf);
 
-    config.$inject = ['API', 'AUTH_ENDPOINT', 'myAuthProvider', '$httpProvider'];
+    config.$inject = ['API', 'AUTH_ENDPOINT', 'authServiceProvider', '$httpProvider'];
     
-    function config(API, AUTH_ENDPOINT, myAuthProvider, $httpProvider){
+    function config(API, AUTH_ENDPOINT, authServiceProvider, $httpProvider){
       //Configuring authentification endpoint
-        myAuthProvider.configEndPoint(API, AUTH_ENDPOINT);
+        authServiceProvider.configEndPoint(API, AUTH_ENDPOINT);
         $httpProvider.defaults.withCredentials = true;
     }
 
-    runConf.$inject = ['$http', 'myAuth', '$rootScope', 'AUTH_EVENTS'];
+    runConf.$inject = ['$http', 'authService', '$rootScope', 'AUTH_EVENTS'];
 
-    function runConf($http, myAuth, $rootScope, AUTH_EVENTS){
+    function runConf($http, authService, $rootScope, AUTH_EVENTS){
       //Attaching Authorization header
       //If user is already authentificated
-      if(myAuth.isAuthentificated()){
+      if(authService.isAuthentificated()){
           $http.defaults.headers.get = getAuthObj();
       }
       //If he is successfully logged in
@@ -46,9 +46,9 @@
       });
 
       function getAuthObj(){
-        var token = myAuth.getToken();
+        var token = authService.getToken();
         return { 'Authorization': 'JWT ' + token }; 
       }     
   }
     
-})()
+})();

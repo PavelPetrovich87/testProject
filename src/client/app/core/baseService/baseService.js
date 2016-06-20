@@ -5,10 +5,10 @@
     .module('core.base')
     .factory('BaseService', BaseService);
 
-  BaseService.$inject = ['$resource', '$http', '$q', '$timeout', '$ds', 'cacheManager', '$rootScope'];
+  BaseService.$inject = ['$resource', '$http', '$q', '$timeout', 'urlWrapper', 'cacheManager', '$rootScope'];
 
   /* @ngInject */
-  function BaseService($resource, $http, $q, $timeout, $ds, cacheManager, $rootScope) {
+  function BaseService($resource, $http, $q, $timeout, urlWrapper, cacheManager, $rootScope) {
 
     var baseService = function () {
     };
@@ -29,7 +29,6 @@
     function Init(apiUrl, modelName, server, isArray, cacheParams, urlPostfix, urlPostfixParams) {
       var self = this;
       self.__apiUrl = apiUrl;
-      self.__server = server || null;
       self.__isArray = (isArray || false);
       self.__modelName = modelName;
       //cache
@@ -44,7 +43,7 @@
           postfixObject[urlPostfixParams[i]] = '@' + urlPostfixParams[i];
         }
       }
-      self.__repository = $resource($ds.WrapUrl(self.__apiUrl, server) + '/:id' + (urlPostfix ? urlPostfix : ''), postfixObject ? postfixObject : {id: '@id'}, {
+      self.__repository = $resource(urlWrapper.WrapUrl(self.__apiUrl, server) + '/:id' + (urlPostfix ? urlPostfix : ''), postfixObject ? postfixObject : {id: '@id'}, {
         'update': {method: 'PUT'},
         'getArray': {
           method: 'GET',
@@ -149,14 +148,14 @@
       var deferred = $q.defer();
       if (self.__cacheParams.caching) {
         //try to get from cache
-        //console.log('Cache enabled. Trying to get: ' + self.__modelName + hashKey);
+        console.log('Cache enabled. Trying to get: ' + self.__modelName + hashKey);
         cacheManager.Get(self.__modelName + hashKey)
           .then(function (value) {
             var now = new Date();
             var expires = new Date(value.expires);
-            //console.log('Cache value by provided key found.');
+            console.log('Cache value by provided key found.');
             if (expires > now) {
-              //console.log('List data was loaded from cache. Key ' + self.__modelName + hashKey);
+              console.log('List data was loaded from cache. Key ' + self.__modelName + hashKey);
               deferred.resolve(value.data);
             }
             else {

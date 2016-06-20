@@ -31,7 +31,7 @@
 
     instance.Init(
       '/api/people', /* Api Url */
-      'lnp', /* Model Name */
+      'people', /* Model Name */
       'peopleServer', /*ServerName*/
       true, /* Is Array*/
       {caching: true, duration: 0, durationList: 60} /* Enable caching, set expiry duration */

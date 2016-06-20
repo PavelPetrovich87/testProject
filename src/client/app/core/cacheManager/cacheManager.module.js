@@ -3,4 +3,4 @@
 
     angular.module('core.cacheManager', ['core.logger', 'ngStorage']);
 
-})()
+})();

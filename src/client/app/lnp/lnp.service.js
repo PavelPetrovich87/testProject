@@ -2,30 +2,30 @@
     'use strict';
 
     angular.module('app.lnp')
-        .factory('lnpModel', LnpModel);
+        .factory('lnpService', LnpService);
 
-        LnpModel.$inject = ['BaseService'];
+        LnpService.$inject = ['BaseService', '$q'];
 
-        function LnpModel(BaseService){
-            var lnpModel = function(){
+        function LnpService(BaseService, $q){
+            var lnpService = function(){
 
             };
 
 
-            lnpModel.prototype = new BaseService();
+            lnpService.prototype = new BaseService();
 
 
-            lnpModel.prototype.activate = function(){
+            lnpService.prototype.activate = function(){
               var self = this;
 
               return self;
             };
 
-            lnpModel.prototype.getMessageCount = function(){
+            lnpService.prototype.getMessageCount = function(){
                return $q.when(10);
             };
 
-            var instance = new lnpModel();
+            var instance = new lnpService();
 
             instance.Init(
               '/lnprequests', /* Api Url */
@@ -33,9 +33,9 @@
               'lnpServer',
               true, /* Is Array*/
               {caching: true, duration: 0, durationList: 60} /* Enable caching, set expiry duration */
-              )
+              );
 
             return instance.activate();
             
         }
-})()
+})();

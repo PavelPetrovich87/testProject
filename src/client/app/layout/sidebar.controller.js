@@ -5,9 +5,9 @@
     .module('app.layout')
     .controller('SidebarController', SidebarController);
 
-  SidebarController.$inject = ['$state', 'routerHelper', 'myAuth', '$rootScope', 'AUTH_EVENTS'];
+  SidebarController.$inject = ['$state', 'routerHelper', 'authService', '$rootScope', 'AUTH_EVENTS'];
   /* @ngInject */
-  function SidebarController($state, routerHelper, myAuth, $rootScope, AUTH_EVENTS) {
+  function SidebarController($state, routerHelper, authService, $rootScope, AUTH_EVENTS) {
 
     var vm = this;
     var states = routerHelper.getStates();
@@ -52,13 +52,13 @@
     function filterByAuthorisation(r){
       if(r.settings && r.settings.roles){
         var stateRoles = r.settings.roles;
-        return myAuth.isAuthorized(stateRoles);
+        return authService.isAuthorized(stateRoles);
       }     
       return true;
     }
 
     function refresh(){
-      userRole = myAuth.getRole();
+      userRole = authService.getRole();
       getNavRoutes();
     }
 

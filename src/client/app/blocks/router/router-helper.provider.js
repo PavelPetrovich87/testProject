@@ -93,7 +93,7 @@
         $rootScope.$on('userAuthSuccess', function(data){
           //TODO: get all user properties that we need to route to it`s default state
           
-        })
+        });
       }
 
       function init() {
