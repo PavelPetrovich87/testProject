@@ -2,6 +2,8 @@
   <component name="FindSettings">
     <option name="customScope" value="Directory 'C:\ionic_projects\ionic_tut\app\core'" />
     <option name="defaultScopeName" value="Directory 'C:\ionic_projects\ionic_tut\app\core'" />
+    <option name="localWholeWordsOnly" value="true" />
+    <option name="LOCAL_WHOLE_WORDS_ONLY" value="true" />
     <option name="SEARCH_SCOPE" value="Directory 'C:\ionic_projects\ionic_tut\app\core'" />
   </component>
 </application>
